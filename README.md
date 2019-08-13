@@ -76,6 +76,41 @@ public class EmployeeControllerMVCTest {
 
 ### 3. Unit Testing  at Service Layer
 
-### 4. Spring Data JPA Testing (@DataJpaTest)
+### 4. Fix Spring MVC Testing with @MockBean and Stubbing
+```
+@RunWith(SpringRunner.class)
+@WebMvcTest(EmployeeController.class)
+public class EmployeeControllerMVCTest {
 
-### 5. Gateway Testing with WireMock
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
+    private EmployeeService employeeService;
+
+    @Test
+    public void success_getEmployee_by_id_1() throws Exception {
+        // Arrange
+        given(this.employeeService.getBy(1))
+                .willReturn(new EmployeeResponse(1, "Somkiat Pui"));
+
+        // Act
+        MvcResult result = this.mvc.perform(get("/employee/1").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andReturn();
+
+        // Convert JSON message to Object
+        ObjectMapper mapper = new ObjectMapper();
+        EmployeeResponse response = mapper.readValue(result.getResponse().getContentAsString(), EmployeeResponse.class);
+
+        // Assert
+        assertEquals(1, response.getId());
+        assertEquals("Somkiat Pui", response.getName());
+    }
+
+}
+```
+
+
+### 5. Spring Data JPA Testing (@DataJpaTest)
+
+### 6. Gateway Testing with WireMock
