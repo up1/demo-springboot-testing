@@ -48,6 +48,31 @@ public class EmployeeControllerSpringBootTest {
 ```
 
 ### 2. Spring MVC Testing (@WebMvcTest)
+```
+@RunWith(SpringRunner.class)
+@WebMvcTest(EmployeeController.class)
+public class EmployeeControllerMVCTest {
+
+    @Autowired
+    private MockMvc mvc;
+
+    @Test
+    public void success_getEmployee_by_id_1() throws Exception {
+        // Act
+        MvcResult result = this.mvc.perform(get("/employee/1").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andReturn();
+
+        // Convert JSON message to Object
+        ObjectMapper mapper = new ObjectMapper();
+        EmployeeResponse response = mapper.readValue(result.getResponse().getContentAsString(), EmployeeResponse.class);
+
+        // Assert
+        assertEquals(1, response.getId());
+        assertEquals("Somkiat Pui", response.getName());
+    }
+
+}
+```
 
 ### 3. Spring Data JPA Testing (@DataJpaTest)
 
