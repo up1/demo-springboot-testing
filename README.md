@@ -74,7 +74,17 @@ public class EmployeeControllerMVCTest {
 }
 ```
 
-### 3. Unit Testing  at Service Layer
+### 3. Create Service Layer
+```
+@Service
+public class EmployeeService {
+
+    public EmployeeResponse getBy(int id) {
+        return new EmployeeResponse(1, "Somkiat Pui");
+    }
+
+}
+```
 
 ### 4. Fix Spring MVC Testing with @MockBean and Stubbing
 ```
@@ -110,7 +120,8 @@ public class EmployeeControllerMVCTest {
 }
 ```
 
-
 ### 5. Spring Data JPA Testing (@DataJpaTest)
 
-### 6. Gateway Testing with WireMock
+### 6. Unit testing with Service Layer
+
+### 7. Gateway Testing with WireMock
