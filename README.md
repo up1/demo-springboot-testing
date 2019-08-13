@@ -218,6 +218,33 @@ public class EmployeeControllerSpringBootTest {
 }
 ```
 
-### 6. Unit testing with Service Layer
+### 8. Unit testing with Service Layer
+```
+@RunWith(MockitoJUnitRunner.class)
+public class EmployeeServiceTest {
 
-### 7. Gateway Testing with WireMock
+    @Mock
+    private EmployeeRepository employeeRepository;
+
+    private EmployeeService employeeService = new EmployeeService();
+
+    @Test
+    public void success_with_get_by_id_1() {
+        // Arrange
+        given(this.employeeRepository.findById(1))
+                .willReturn(Optional.of(new Employee("Somkiat", "Pui")));
+
+        employeeService.setEmployeeRepository(employeeRepository);
+
+        // Act
+        EmployeeResponse response = employeeService.getBy(1);
+
+        // Assert
+        assertEquals(1, response.getId());
+        assertEquals("Somkiat Pui", response.getName());
+    }
+    
+}
+```
+
+### 9. Gateway Testing with WireMock
