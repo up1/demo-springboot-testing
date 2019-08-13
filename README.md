@@ -74,8 +74,8 @@ public class EmployeeControllerMVCTest {
 }
 ```
 
-### 3. Spring Data JPA Testing (@DataJpaTest)
+### 3. Unit Testing  at Service Layer
 
-### 4. Unit Testing  at Service Layer
+### 4. Spring Data JPA Testing (@DataJpaTest)
 
 ### 5. Gateway Testing with WireMock
