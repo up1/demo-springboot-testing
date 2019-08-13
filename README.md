@@ -121,6 +121,60 @@ public class EmployeeControllerMVCTest {
 ```
 
 ### 5. Spring Data JPA Testing (@DataJpaTest)
+Entity :: Employee.java
+```
+@Entity
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String firstName;
+    private String lastName;
+
+    public Employee() {
+    }
+
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+```
+
+EmployeeRepository.java
+```
+public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
+}
+```
+
+Spring Data JPA Testing
+```
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class EmployeeRepositoryTest {
+
+    @Autowired
+    private TestEntityManager entityManager;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Test
+    public void success_get_employee_by_id_1() {
+        // Arrange
+        this.entityManager.persist(new Employee("Somkiat", "Pui"));
+
+        // Act
+        Optional<Employee> employee = employeeRepository.findById(1);
+
+        // Assert
+        assertEquals("Somkiat", employee.get().getFirstName());
+        assertEquals("Pui", employee.get().getLastName());
+    }
+
+}
+```
+
 
 ### 6. Unit testing with Service Layer
 
