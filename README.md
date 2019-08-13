@@ -13,6 +13,19 @@ bootJar {
 }
 ```
 
+Run in development mode
+```
+$gradlew bootRun 
+```
+
+Run with Jar file
+```
+$gradlew bootJar
+$java -jar build/libs/demo.jar 
+```
+
+
+
 ### 1. Spring Boot Testing (@SpringBootTest)
 
 ### 2. Spring MVC Testing (@WebMvcTest)
