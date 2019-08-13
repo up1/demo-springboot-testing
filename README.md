@@ -1,11 +1,24 @@
 # Demo Spring Boot Testing
 
-## 1. Spring Boot Testing (@SpringBootTest)
+### Setup grafle project :: `build.gradle`
+```
+plugins {
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
+	id 'java'
+	id 'jacoco'
+}
 
-## 2. Spring MVC Testing (@WebMvcTest)
+bootJar {
+	archiveFileName = "demo.${archiveExtension.get()}"
+}
+```
 
-## 3. Spring Data JPA Testing (@DataJpaTest)
+### 1. Spring Boot Testing (@SpringBootTest)
 
-## 4. Unit Testing  at Service Layer
+### 2. Spring MVC Testing (@WebMvcTest)
 
-## 5. Gateway Testing with WireMock
+### 3. Spring Data JPA Testing (@DataJpaTest)
+
+### 4. Unit Testing  at Service Layer
+
+### 5. Gateway Testing with WireMock
