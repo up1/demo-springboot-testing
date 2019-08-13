@@ -190,6 +190,33 @@ public class EmployeeService {
 
 }
 ```
+### 7. Fix Spring Boot Testing with @MockBean and Stubbing
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class EmployeeControllerSpringBootTest {
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @MockBean
+    private EmployeeService employeeService;
+
+    @Test
+    public void success_getEmployee_id_1() {
+        // Arrange
+        given(this.employeeService.getBy(1))
+                .willReturn(new EmployeeResponse(1, "Somkiat Pui"));
+
+        // Act
+        EmployeeResponse response = restTemplate.getForObject("/employee/1", EmployeeResponse.class);
+
+        // Assert
+        assertEquals(1, response.getId());
+        assertEquals("Somkiat Pui", response.getName());
+    }
+}
+```
 
 ### 6. Unit testing with Service Layer
 
