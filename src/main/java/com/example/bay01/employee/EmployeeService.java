@@ -16,4 +16,7 @@ public class EmployeeService {
         return new EmployeeResponse(1, String.format("%s %s", employee.get().getFirstName(), employee.get().getLastName()));
     }
 
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 }
