@@ -247,4 +247,5 @@ public class EmployeeServiceTest {
 }
 ```
 
-### 9. Gateway Testing with WireMock
+### 9. Gateway Testing with WireMock (RESTful API)
+Using [library wiremock](https://github.com/tomakehurst/wiremock)
