@@ -249,3 +249,42 @@ public class EmployeeServiceTest {
 
 ### 9. Gateway Testing with WireMock (RESTful API)
 Using [library wiremock](https://github.com/tomakehurst/wiremock)
+
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class PostGatewayTest {
+
+    @Autowired
+    private PostGateway postGateway;
+
+    @Rule
+    public WireMockRule wireMockRule = new WireMockRule(8089);
+
+    @Test
+    public void success_getPostBy_id_1() throws IOException {
+        // Arrange
+        wireMockRule.stubFor(get(urlPathEqualTo("/1"))
+                .willReturn(aResponse()
+                        .withBody(read("classpath:post/post_response_success.json"))
+                        .withHeader(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withStatus(200)));
+
+        // Act
+        Optional<PostResponse> postResponse = postGateway.getPostBy(1);
+
+        // Assert
+        assertTrue(postResponse.isPresent());
+        assertEquals(1, postResponse.get().getId());
+        assertEquals(1, postResponse.get().getUserId());
+        assertEquals("Mock title", postResponse.get().getTitle());
+        assertEquals("Mock body", postResponse.get().getBody());
+
+    }
+
+    private String read(String filePath) throws IOException {
+        File file = ResourceUtils.getFile(filePath);
+        return new String(Files.readAllBytes(file.toPath()));
+    }
+}
+```
