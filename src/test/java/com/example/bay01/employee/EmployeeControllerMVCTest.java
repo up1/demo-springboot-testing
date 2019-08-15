@@ -1,5 +1,6 @@
 package com.example.bay01.employee;
 
+import com.example.bay01.post.PostGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,9 @@ public class EmployeeControllerMVCTest {
 
     @MockBean
     private EmployeeService employeeService;
+
+    @MockBean
+    private PostGateway postGateway;
 
     @Test
     public void success_getEmployee_by_id_1() throws Exception {
